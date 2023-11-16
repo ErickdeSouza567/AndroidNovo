@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 abstract class BancoSQLite : RoomDatabase() {
 
     abstract fun produtoDao(): ProdutoDAO
-
+    abstract fun horarioDao(): HorarioDAO
     companion object {
 
         @Volatile

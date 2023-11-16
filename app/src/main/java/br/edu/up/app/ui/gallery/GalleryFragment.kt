@@ -41,8 +41,9 @@ class GalleryFragment : Fragment() {
         val datePicker: DatePicker = binding.datePicker
         val saveButton: Button = binding.saveButton
         val listButton: Button = binding.listButton
+        val apagarDatasButton: Button = binding.apagarDatasButton
 
-        galleryViewModel.ultimaData // Não é necessário chamar .observe()
+        galleryViewModel.ultimaData
 
         saveButton.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -51,16 +52,20 @@ class GalleryFragment : Fragment() {
             galleryViewModel.salvarData(data)
         }
 
-        // Modificação: Removendo a observação inicial para a última data
-
-        // ...
+        apagarDatasButton.setOnClickListener {
+            lifecycleScope.launchWhenStarted {
+                val mensagem = galleryViewModel.apagarTodasAsDatas()
+                textView.text = mensagem
+            }
+        }
 
         listButton.setOnClickListener {
-            // Use corrotinas para observar as atualizações no LiveData apenas quando o botão "Listar" for clicado
             lifecycleScope.launchWhenStarted {
-                galleryViewModel.ultimaData.collect { horario: Horario? ->
-                    // Atualize a UI quando houver uma mudança na data
-                    textView.text = "Última Data Salva:\n${formatarDataHora(horario?.dataHora)}"
+                val horario = galleryViewModel.obterUltimaData()
+                if (horario != null) {
+                    textView.text = "Última Data Salva:\n${formatarDataHora(horario.dataHora)}"
+                } else {
+                    textView.text = "Não há datas"
                 }
             }
         }
@@ -69,7 +74,6 @@ class GalleryFragment : Fragment() {
     }
 
     private fun formatarDataHora(dataHora: Long?): String {
-        // Verifica se a dataHora não é nula
         return dataHora?.let {
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = dataHora

@@ -24,10 +24,4 @@ interface ProdutoDAO {
 
     @Query("delete from produtos")
     suspend fun excluirTodos()
-
-    @Query("SELECT * FROM Horario ORDER BY id DESC LIMIT 1")
-    fun obterUltimaData(): Flow<Horario?>
-
-    @Insert
-    fun inserirData(horario: Horario)
 }
