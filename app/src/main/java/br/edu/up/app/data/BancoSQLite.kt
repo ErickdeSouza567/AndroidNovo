@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [Livro::class, Horario::class], version = 1, exportSchema = false)
 abstract class BancoSQLite : RoomDatabase() {
 
-    abstract fun produtoDao(): LivroDAO
+    abstract fun livroDao(): LivroDAO
     abstract fun horarioDao(): HorarioDAO
     companion object {
 
@@ -20,7 +20,7 @@ abstract class BancoSQLite : RoomDatabase() {
                 INSTANCIA = Room.databaseBuilder(
                     context.applicationContext,
                     BancoSQLite::class.java,
-                    "meu_banco.db"
+                    "meu_banconovoo.db"
                 ).build()
             }
             return INSTANCIA as BancoSQLite

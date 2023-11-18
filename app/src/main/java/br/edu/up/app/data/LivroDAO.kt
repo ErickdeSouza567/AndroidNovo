@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LivroDAO {
 
-    @Query("select * from produtos")
+    @Query("select * from livros")
     fun listar(): Flow<List<Livro>>
 
     @Insert
@@ -18,9 +18,9 @@ interface LivroDAO {
     @Delete
     suspend fun excluir(livro: Livro)
 
-    @Query("delete from produtos where id = :id")
+    @Query("delete from livros where id = :id")
     suspend fun excluir(id: Int)
 
-    @Query("delete from produtos")
+    @Query("delete from livros")
     suspend fun excluirTodos()
 }

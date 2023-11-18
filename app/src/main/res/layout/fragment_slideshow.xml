@@ -22,7 +22,7 @@
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/bifeacavalo"
+        android:src="@drawable/itacoisa"
         android:layout_marginTop="16dp"/>
 
     <Button

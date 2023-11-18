@@ -14,29 +14,31 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LivroFragment : Fragment() {
 
+    private val viewModel: LivroViewModel by activityViewModels()
+    private lateinit var binding: FragmentLivroBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val viewModel : LivroViewModel by activityViewModels()
-        val binding = FragmentLivroBinding.inflate(layoutInflater)
+        binding = FragmentLivroBinding.inflate(layoutInflater)
 
-        val produto = viewModel.livro
-        binding.inputNome.setText(produto.nome)
-        binding.inputDescricao.setText(produto.descricao)
-        binding.inputPreco.setText(produto.preco.toString())
-        binding.inputPeso.setText(produto.peso.toString())
-        binding.inputFoto.setText(produto.foto)
+        val livro = viewModel.livro
+        binding.inputTitulo.setText(livro.titulo)
+        binding.inputDescricao.setText(livro.descricao)
+        binding.inputPreco.setText(livro.preco.toString())
+        binding.inputFoto.setText(livro.foto)
+        binding.inputAutor.setText(livro.autor) // Adicione esta linha para o campo autor
 
         binding.btnSalvar.setOnClickListener {
             val livroSalvar = Livro(
-                produto.id,
-                produto.docId,
-                binding.inputNome.text.toString(),
+                livro.id,
+                livro.docId,
+                binding.inputTitulo.text.toString(),
                 binding.inputDescricao.text.toString(),
                 binding.inputPreco.text.toString().toDouble(),
-                binding.inputPeso.text.toString().toInt(),
+                binding.inputAutor.text.toString(),
                 binding.inputFoto.text.toString(),
                 0
             )

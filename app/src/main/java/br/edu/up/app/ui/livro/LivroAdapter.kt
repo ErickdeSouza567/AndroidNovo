@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import br.edu.up.app.R
 import br.edu.up.app.data.Livro
-//import br.edu.up.app.ui.livro.databinding.FragmentItemProdutoBinding
 import br.edu.up.app.databinding.FragmentItemLivroBinding
 import coil.load
 import com.google.firebase.ktx.Firebase
@@ -18,11 +17,9 @@ import com.google.firebase.storage.ktx.storage
 class LivroAdapter(
     private val livros: List<Livro>,
     val viewModel: LivroViewModel
-    ) :
-    RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder(
             FragmentItemLivroBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -30,43 +27,36 @@ class LivroAdapter(
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val livro = livros[position]
 
-        val itemProduto = livros[position]
+        // Altere a propriedade nome para titulo
+        holder.txtNome.text = livro.titulo
+        holder.txtPreco.text = livro.preco.toString()
 
-        //Carregamento local
-        //val idFoto = Fotos.get(itemProduto.foto)
-        //holder.imgFoto.setImageResource(idFoto)
-
-        //Carregamento remoto
-        holder.imgFoto.load(R.drawable.semfoto)
-        Firebase.storage.getReference(itemProduto.foto)
+        // Carregamento remoto
+        holder.imgFoto.load(R.drawable.semfoto) // Altere para o seu recurso de imagem padrão
+        Firebase.storage.getReference(livro.foto)
             .downloadUrl.addOnSuccessListener { imageUrl ->
                 holder.imgFoto.load(imageUrl)
             }
 
-        holder.txtNome.text = itemProduto.nome
-        holder.txtPreco.text = itemProduto.preco.toString()
-
-        //clique para editar item da lista
         holder.itemView.setOnClickListener { view ->
-            viewModel.editar(itemProduto)
+            viewModel.editar(livro)
             val action = LivrosFragmentDirections.actionNavHomeToProdutoFragment()
             view.findNavController().navigate(action)
         }
 
-        //clique para excluir item da lista
         holder.itemView.setOnLongClickListener { view ->
             AlertDialog.Builder(view.context)
                 .setMessage("ATENÇÃO: Tem certeza que deseja excluir?")
                 .setPositiveButton("Confirmar") { dialog, id ->
-                    viewModel.excluir(itemProduto)
+                    viewModel.excluir(livro)
                 }
                 .setNegativeButton("CANCELAR") { dialog, id ->
-                    //ignorar
+                    // Ignorar
                 }
                 .create()
                 .show()
@@ -83,5 +73,4 @@ class LivroAdapter(
         val txtNome: TextView = binding.txtNome
         val txtPreco: TextView = binding.txtPreco
     }
-
 }

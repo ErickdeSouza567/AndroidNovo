@@ -8,15 +8,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 class LivroRepositoryFirebase
-    @Inject constructor(val produtosRef : CollectionReference): LivroRepository {
+@Inject constructor(val livrosRef : CollectionReference): LivroRepository {
 
-    private var _produtos = MutableStateFlow(listOf<Livro>())
-    override val produtos: Flow<List<Livro>> get() = _produtos.asStateFlow()
+    private var _livros = MutableStateFlow(listOf<Livro>())
+    override val livros: Flow<List<Livro>> get() = _livros.asStateFlow()
 
     init {
-        produtosRef.addSnapshotListener { snapshot, _ ->
+        livrosRef.addSnapshotListener { snapshot, _ ->
             if (snapshot == null){
-                _produtos = MutableStateFlow(listOf())
+                _livros.value = listOf()
             } else {
                 var livros = mutableListOf<Livro>()
                 snapshot.documents.forEach { doc ->
@@ -26,7 +26,7 @@ class LivroRepositoryFirebase
                         livros.add(livro)
                     }
                 }
-                _produtos.value = livros
+                _livros.value = livros
             }
 
         }
@@ -34,22 +34,22 @@ class LivroRepositoryFirebase
 
     override suspend fun salvar(livro: Livro) {
         if(livro.docId.isNullOrEmpty()){
-            var doc = produtosRef.document()
+            var doc = livrosRef.document()
             livro.docId = doc.id
             doc.set(livro)
         } else {
-            produtosRef.document(livro.docId).set(livro)
+            livrosRef.document(livro.docId).set(livro)
         }
     }
 
     override suspend fun excluir(livro: Livro) {
-        produtosRef.document(livro.docId).delete()
+        livrosRef.document(livro.docId).delete()
     }
 
     override suspend fun excluirTodos() {
-        _produtos.collect{ produtos ->
-            produtos.forEach{ produto ->
-                produtosRef.document(produto.docId).delete()
+        _livros.collect { livros ->
+            livros.forEach { livro ->
+                livrosRef.document(livro.docId).delete()
             }
         }
     }

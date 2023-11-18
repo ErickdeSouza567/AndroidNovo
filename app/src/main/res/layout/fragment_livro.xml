@@ -14,12 +14,12 @@
         android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputNome"
+            android:id="@+id/inputTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:hint="Nome do livro" />
+            android:hint="Título do livro" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,7 +43,7 @@
         android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_preco"
+            android:id="@+id/inputPreco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -58,11 +58,11 @@
         android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPeso"
+            android:id="@+id/inputAutor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Peso" />
+            android:hint="Autor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

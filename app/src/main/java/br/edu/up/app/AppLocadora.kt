@@ -17,27 +17,27 @@ import javax.inject.Singleton
 @Module
 @HiltAndroidApp
 @InstallIn(SingletonComponent::class)
-class AppCardapio : Application() {
+class AppLocadora : Application() {
 
     @Provides
-    fun provideProdutosRef() : CollectionReference {
-        return Firebase.firestore.collection("produtos")
+    fun provideLivrosRef() : CollectionReference {
+        return Firebase.firestore.collection("livros")
     }
 
     @Provides
-    fun provideProdutoRepositoryFirebase(produtosRef: CollectionReference)
-                                                          : LivroRepository{
-        return LivroRepositoryFirebase(produtosRef)
+    fun provideLivroRepositoryFirebase(livrosRef: CollectionReference)
+            : LivroRepository{
+        return LivroRepositoryFirebase(livrosRef)
     }
 
     @Provides
-    fun provideProdutoRepositorySqlite(livroDAO: LivroDAO) : LivroRepositorySqlite {
+    fun provideLivroRepositorySqlite(livroDAO: LivroDAO) : LivroRepositorySqlite {
         return LivroRepositorySqlite(livroDAO)
     }
 
     @Provides
-    fun provideProdutoDAO(bancoSQLite: BancoSQLite): LivroDAO {
-        return bancoSQLite.produtoDao()
+    fun provideLivroDAO(bancoSQLite: BancoSQLite): LivroDAO {
+        return bancoSQLite.livroDao()
     }
 
     @Provides
