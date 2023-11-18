@@ -3,7 +3,6 @@ package br.edu.up.app
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,8 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.up.app.databinding.ActivityMainBinding
-import br.edu.up.app.ui.produto.ProdutoViewModel
-import br.edu.up.app.ui.produto.ProdutosFragmentDirections
+import br.edu.up.app.ui.livro.LivroViewModel
+import br.edu.up.app.ui.livro.LivrosFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel : ProdutoViewModel by viewModels()
+        val viewModel : LivroViewModel by viewModels()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.fab.setOnClickListener { view ->
             viewModel.novo()
             //Action safeArgs
-            val action = ProdutosFragmentDirections.actionNavHomeToProdutoFragment()
+            val action = LivrosFragmentDirections.actionNavHomeToProdutoFragment()
             //Nav controller
             findNavController(R.id.nav_host_fragment_content_main).navigate(action)
         }

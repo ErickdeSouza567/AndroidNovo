@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "produtos")
-data class Produto(
+data class Livro(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var docId: String,

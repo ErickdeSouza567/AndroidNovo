@@ -26,17 +26,17 @@ class AppCardapio : Application() {
 
     @Provides
     fun provideProdutoRepositoryFirebase(produtosRef: CollectionReference)
-                                                          : ProdutoRepository{
-        return ProdutoRepositoryFirebase(produtosRef)
+                                                          : LivroRepository{
+        return LivroRepositoryFirebase(produtosRef)
     }
 
     @Provides
-    fun provideProdutoRepositorySqlite(produtoDAO: ProdutoDAO) : ProdutoRepositorySqlite {
-        return ProdutoRepositorySqlite(produtoDAO)
+    fun provideProdutoRepositorySqlite(livroDAO: LivroDAO) : LivroRepositorySqlite {
+        return LivroRepositorySqlite(livroDAO)
     }
 
     @Provides
-    fun provideProdutoDAO(bancoSQLite: BancoSQLite): ProdutoDAO {
+    fun provideProdutoDAO(bancoSQLite: BancoSQLite): LivroDAO {
         return bancoSQLite.produtoDao()
     }
 

@@ -1,48 +1,44 @@
 package br.edu.up.app.data
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProdutoRepositorySqlite
-    @Inject constructor(val produtoDAO: ProdutoDAO) : ProdutoRepository {
+class LivroRepositorySqlite
+    @Inject constructor(val livroDAO: LivroDAO) : LivroRepository {
 
-    override val produtos: Flow<List<Produto>> get() = produtoDAO.listar()
-    override suspend fun salvar(produto: Produto) {
-        if (produto.id == 0){
-            produtoDAO.inserir(produto)
+    override val produtos: Flow<List<Livro>> get() = livroDAO.listar()
+    override suspend fun salvar(livro: Livro) {
+        if (livro.id == 0){
+            livroDAO.inserir(livro)
         } else {
-            produtoDAO.atualizar(produto)
+            livroDAO.atualizar(livro)
         }
     }
-    override suspend fun excluir(produto: Produto){
-        produtoDAO.excluir(produto)
+    override suspend fun excluir(livro: Livro){
+        livroDAO.excluir(livro)
     }
 
     override suspend fun excluirTodos(){
-        produtoDAO.excluirTodos()
+        livroDAO.excluirTodos()
     }
 
 //    init {
 //        CoroutineScope(Job()).launch {
 //
-//            produtoDAO.excluirTodos()
+//            livroDAO.excluirTodos()
 //            delay(15000)
 //            val produtos = produtos()
 //            for(p in produtos){
 //                p.id = 0
-//                produtoDAO.inserir(p)
+//                livroDAO.inserir(p)
 //            }
 //        }
 //    }
 
 //    companion object {
-//        fun produtos(): MutableList<Produto> {
+//        fun produtos(): MutableList<Livro> {
 //            val lista = mutableListOf(
-//                Produto(
+//                Livro(
 //                    1,
 //                    "Acompanhamentos",
 //                    "Manteiga, nata, mel, requeijão salgado, queijo branco.",
@@ -51,7 +47,7 @@ class ProdutoRepositorySqlite
 //                    "cafe1.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    2,
 //                    "Bruschetta de salmão e abacate",
 //                    "Pão preto, salmão defumado, queijo Philadelphia, abacate, tomate, ovos.",
@@ -60,7 +56,7 @@ class ProdutoRepositorySqlite
 //                    "cafe2.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    3,
 //                    "Croque Madame",
 //                    "Pão torrado, salame de vitela, ovos, manteiga, queijo, rúcula, cenoura, pepino, rabanete.",
@@ -69,7 +65,7 @@ class ProdutoRepositorySqlite
 //                    "cafe3.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    4,
 //                    "Panquecas de queijo",
 //                    "Folhada, recheio de queijo, rúcula, cenoura, pepino, rabanete.",
@@ -78,7 +74,7 @@ class ProdutoRepositorySqlite
 //                    "cafe4.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    5,
 //                    "Sanduíche de queijo",
 //                    "Pão torrado, queijo cheddar, queijo gouda, manteiga, rúcula, cenoura, pepino, rabanete.",
@@ -87,7 +83,7 @@ class ProdutoRepositorySqlite
 //                    "cafe5.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    6,
 //                    "Sanduíche de torrada escura",
 //                    "Pão escuro, presunto, ovos, queijo gouda, rúcula, cenoura, pepino, rabanete.",
@@ -96,7 +92,7 @@ class ProdutoRepositorySqlite
 //                    "cafe6.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    7,
 //                    "Omelete misto",
 //                    "Salada de ovos, filé de frango, queijo gouda, rúcula e tomate.",
@@ -105,7 +101,7 @@ class ProdutoRepositorySqlite
 //                    "cafe7.jpg",
 //                    1
 //                ),
-//                Produto(
+//                Livro(
 //                    8,
 //                    "Prato de queijo",
 //                    "Queijo de leite de ovelha, queijo motal, requeijão, queijo branco.",
@@ -114,7 +110,7 @@ class ProdutoRepositorySqlite
 //                    "aperitivo1.jpg",
 //                    2
 //                ),
-//                Produto(
+//                Livro(
 //                    9,
 //                    "Frios",
 //                    "Linguicinha, rolinho de frango, basturma de vitela.",
@@ -123,7 +119,7 @@ class ProdutoRepositorySqlite
 //                    "aperitivo2.jpg",
 //                    2
 //                ),
-//                Produto(
+//                Livro(
 //                    10,
 //                    "Berinjelas ao estilo oriental",
 //                    "Berinjelas, nozes, curry, creme de leite, alho.",
@@ -132,7 +128,7 @@ class ProdutoRepositorySqlite
 //                    "aperitivo3.jpg",
 //                    2
 //                ),
-//                Produto(
+//                Livro(
 //                    11,
 //                    "Lanche especial de berinjelas",
 //                    "Berinjela marinada, molho especial, verduras.",
@@ -141,7 +137,7 @@ class ProdutoRepositorySqlite
 //                    "aperitivo4.jpg",
 //                    2
 //                ),
-//                Produto(
+//                Livro(
 //                    12,
 //                    "Tomates marinados em vinagre",
 //                    "Tomate, vinagre de uva, salsa, sementes de abóbora, azeite, alho.",
@@ -150,7 +146,7 @@ class ProdutoRepositorySqlite
 //                    "aperitivo5.jpg",
 //                    2
 //                ),
-//                Produto(
+//                Livro(
 //                    13,
 //                    "Petisco de batata",
 //                    "Batata, queijo branco, queijo motal, tomate seco, queijo gouda, azeite, alho.",
@@ -159,7 +155,7 @@ class ProdutoRepositorySqlite
 //                    "aperitivo6.jpg",
 //                    2
 //                ),
-//                Produto(
+//                Livro(
 //                    14,
 //                    "Salada de berinjela",
 //                    "Berinjela, tomate, pimentão, pimentão, óleo de milho, alho, verduras frescas.",
@@ -168,7 +164,7 @@ class ProdutoRepositorySqlite
 //                    "salada1.jpg",
 //                    3
 //                ),
-//                Produto(
+//                Livro(
 //                    15,
 //                    "Salada Russa",
 //                    "Carne, batata, cenoura, ovos, pepino fresco, pepino em conserva, maionese, ervilha.",
@@ -177,7 +173,7 @@ class ProdutoRepositorySqlite
 //                    "salada2.jpg",
 //                    3
 //                ),
-//                Produto(
+//                Livro(
 //                    16,
 //                    "Salada crocante de berinjela",
 //                    "Berinjelas, tomates, molho de ostra, sementes de gergelim branco.",
@@ -186,7 +182,7 @@ class ProdutoRepositorySqlite
 //                    "salada3.jpg",
 //                    3
 //                ),
-//                Produto(
+//                Livro(
 //                    17,
 //                    "Sopa de frango com arroz",
 //                    "Frango, arroz redondo, cebola, cenoura, ameixa cereja, cúrcuma.",
@@ -195,7 +191,7 @@ class ProdutoRepositorySqlite
 //                    "sopa1.jpg",
 //                    4
 //                ),
-//                Produto(
+//                Livro(
 //                    18,
 //                    "Sopa de macarrão com almôndegas",
 //                    "Macarrão caseiro, vitela, caldo de carne, cebola, cenoura, açafrão, feijão mungo.",
@@ -204,7 +200,7 @@ class ProdutoRepositorySqlite
 //                    "sopa2.jpg",
 //                    4
 //                ),
-//                Produto(
+//                Livro(
 //                    19,
 //                    "Sopa de cebola",
 //                    "Cebola, farinha de trigo, batata, ovos, coentro, manteiga.",
@@ -213,7 +209,7 @@ class ProdutoRepositorySqlite
 //                    "sopa3.jpg",
 //                    4
 //                ),
-//                Produto(
+//                Livro(
 //                    20,
 //                    "Filé mignon com batata",
 //                    "Filé mignon, manteiga, pimenta do reino, tomate, batata.",
@@ -222,7 +218,7 @@ class ProdutoRepositorySqlite
 //                    "carne1.jpg",
 //                    5
 //                ),
-//                Produto(
+//                Livro(
 //                    21,
 //                    "Dolma do Azerbaijão",
 //                    "Vitela, borrego, beringela, tomate, pimentão.",
@@ -231,7 +227,7 @@ class ProdutoRepositorySqlite
 //                    "carne2.jpg",
 //                    5
 //                ),
-//                Produto(
+//                Livro(
 //                    22,
 //                    "Fritas com Carne",
 //                    "Massa, vitela, rabo gordo, verduras frescas.",
@@ -240,7 +236,7 @@ class ProdutoRepositorySqlite
 //                    "carne3.jpg",
 //                    5
 //                ),
-//                Produto(
+//                Livro(
 //                    23,
 //                    "Vitela com cogumelos em molho picante",
 //                    "Vitela, cogumelos, manteiga, molho de pimenta doce, cebola, coentro.",
@@ -249,7 +245,7 @@ class ProdutoRepositorySqlite
 //                    "carne4.jpg",
 //                    5
 //                ),
-//                Produto(
+//                Livro(
 //                    24,
 //                    "Tabaka de frango",
 //                    "Frango para duas pessoas",
@@ -258,7 +254,7 @@ class ProdutoRepositorySqlite
 //                    "frango1.jpg",
 //                    6
 //                ),
-//                Produto(
+//                Livro(
 //                    25,
 //                    "Filé de frango com batata",
 //                    "Filé de frango, batata, tomate",
@@ -267,7 +263,7 @@ class ProdutoRepositorySqlite
 //                    "frango2.jpg",
 //                    6
 //                ),
-//                Produto(
+//                Livro(
 //                    26,
 //                    "Frango árabe",
 //                    "Frango, cebola, tomate, pimentão, berinjela, batata.",
@@ -276,7 +272,7 @@ class ProdutoRepositorySqlite
 //                    "frango3.jpg",
 //                    6
 //                ),
-//                Produto(
+//                Livro(
 //                    27,
 //                    "Frutas da estação",
 //                    "Maçã, pêssego, morango, melão e uvas.",
@@ -285,7 +281,7 @@ class ProdutoRepositorySqlite
 //                    "sobremesa1.jpg",
 //                    7
 //                ),
-//                Produto(
+//                Livro(
 //                    28,
 //                    "Geléia",
 //                    "Geléia de amoras, morango e pêssego.",
@@ -294,7 +290,7 @@ class ProdutoRepositorySqlite
 //                    "sobremesa2.jpg",
 //                    7
 //                ),
-//                Produto(
+//                Livro(
 //                    29,
 //                    "Variedade de frutas secas e nozes",
 //                    "Castanhas, damasco, uvas secas e nozes",
@@ -303,7 +299,7 @@ class ProdutoRepositorySqlite
 //                    "sobremesa3.jpg",
 //                    7
 //                ),
-//                Produto(
+//                Livro(
 //                    30,
 //                    "Sorvete",
 //                    "Sorvete de morango.",
@@ -312,7 +308,7 @@ class ProdutoRepositorySqlite
 //                    "sobremesa4.jpg",
 //                    7
 //                ),
-//                Produto(
+//                Livro(
 //                    31,
 //                    "Vinho tinto",
 //                    "Vinho tinto seco, francês.",
@@ -321,7 +317,7 @@ class ProdutoRepositorySqlite
 //                    "bebida1.jpg",
 //                    8
 //                ),
-//                Produto(
+//                Livro(
 //                    32,
 //                    "Cerveja Pilsen",
 //                    "Caneco de cerveja Pilsen de 500ml.",
@@ -330,7 +326,7 @@ class ProdutoRepositorySqlite
 //                    "bebida2.jpg",
 //                    8
 //                ),
-//                Produto(
+//                Livro(
 //                    33,
 //                    "Xícara de chá",
 //                    "Xícara de chá de ervas egípcias.",
@@ -339,7 +335,7 @@ class ProdutoRepositorySqlite
 //                    "bebida3.jpg",
 //                    8
 //                ),
-//                Produto(
+//                Livro(
 //                    34,
 //                    "Capuccino",
 //                    "Xícara pequena de café.",
@@ -348,7 +344,7 @@ class ProdutoRepositorySqlite
 //                    "bebida4.jpg",
 //                    8
 //                ),
-//                Produto(
+//                Livro(
 //                    35,
 //                    "Coquetel de maracujá",
 //                    "Coquetel de vodka com maracujá.",

@@ -1,6 +1,5 @@
-package br.edu.up.app.ui.produto
+package br.edu.up.app.ui.livro
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,23 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import br.edu.up.app.R
-import br.edu.up.app.data.Produto
-import br.edu.up.app.databinding.FragmentProdutoBinding
+import br.edu.up.app.data.Livro
+import br.edu.up.app.databinding.FragmentLivroBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProdutoFragment : Fragment() {
+class LivroFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val viewModel : ProdutoViewModel by activityViewModels()
-        val binding = FragmentProdutoBinding.inflate(layoutInflater)
+        val viewModel : LivroViewModel by activityViewModels()
+        val binding = FragmentLivroBinding.inflate(layoutInflater)
 
-        val produto = viewModel.produto
+        val produto = viewModel.livro
         binding.inputNome.setText(produto.nome)
         binding.inputDescricao.setText(produto.descricao)
         binding.inputPreco.setText(produto.preco.toString())
@@ -32,7 +30,7 @@ class ProdutoFragment : Fragment() {
         binding.inputFoto.setText(produto.foto)
 
         binding.btnSalvar.setOnClickListener {
-            val produtoSalvar = Produto(
+            val livroSalvar = Livro(
                 produto.id,
                 produto.docId,
                 binding.inputNome.text.toString(),
@@ -42,7 +40,7 @@ class ProdutoFragment : Fragment() {
                 binding.inputFoto.text.toString(),
                 0
             )
-            viewModel.produto = produtoSalvar
+            viewModel.livro = livroSalvar
             viewModel.salvar()
             findNavController().popBackStack()
         }

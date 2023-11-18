@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="br.edu.up.app.ui.produto.ProdutosFragment"
+        android:name="br.edu.up.app.ui.livro.LivrosFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_lista_produtos" >
+        tools:layout="@layout/fragment_lista_livros" >
         <action
             android:id="@+id/action_nav_home_to_produtoFragment"
-            app:destination="@id/produtoFragment" />
+            app:destination="@id/livroFragment" />
     </fragment>
 
     <fragment
@@ -27,8 +27,8 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
-        android:id="@+id/produtoFragment"
-        android:name="br.edu.up.app.ui.produto.ProdutoFragment"
+        android:id="@+id/livroFragment"
+        android:name="br.edu.up.app.ui.livro.LivroFragment"
         android:label="Cadastro de produtos"
-        tools:layout="@layout/fragment_produto" />
+        tools:layout="@layout/fragment_livro" />
 </navigation>

@@ -1,4 +1,4 @@
-package br.edu.up.app.ui.produto
+package br.edu.up.app.ui.livro
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,23 +8,23 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import br.edu.up.app.R
-import br.edu.up.app.data.Produto
-//import br.edu.up.app.ui.produto.databinding.FragmentItemProdutoBinding
-import br.edu.up.app.databinding.FragmentItemProdutoBinding
+import br.edu.up.app.data.Livro
+//import br.edu.up.app.ui.livro.databinding.FragmentItemProdutoBinding
+import br.edu.up.app.databinding.FragmentItemLivroBinding
 import coil.load
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class ProdutosAdapter(
-    private val produtos: List<Produto>,
-    val viewModel: ProdutoViewModel
+class LivroAdapter(
+    private val livros: List<Livro>,
+    val viewModel: LivroViewModel
     ) :
-    RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
+    RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            FragmentItemProdutoBinding.inflate(
+            FragmentItemLivroBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -35,7 +35,7 @@ class ProdutosAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val itemProduto = produtos[position]
+        val itemProduto = livros[position]
 
         //Carregamento local
         //val idFoto = Fotos.get(itemProduto.foto)
@@ -54,7 +54,7 @@ class ProdutosAdapter(
         //clique para editar item da lista
         holder.itemView.setOnClickListener { view ->
             viewModel.editar(itemProduto)
-            val action = ProdutosFragmentDirections.actionNavHomeToProdutoFragment()
+            val action = LivrosFragmentDirections.actionNavHomeToProdutoFragment()
             view.findNavController().navigate(action)
         }
 
@@ -74,9 +74,9 @@ class ProdutosAdapter(
         }
     }
 
-    override fun getItemCount(): Int = produtos.size
+    override fun getItemCount(): Int = livros.size
 
-    inner class ViewHolder(binding: FragmentItemProdutoBinding) :
+    inner class ViewHolder(binding: FragmentItemLivroBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         val imgFoto: ImageView = binding.imgFoto

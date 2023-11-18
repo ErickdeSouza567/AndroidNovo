@@ -1,4 +1,4 @@
-package br.edu.up.app.ui.produto.placeholder
+package br.edu.up.app.ui.livro.placeholder
 
 import java.util.ArrayList
 import java.util.HashMap
